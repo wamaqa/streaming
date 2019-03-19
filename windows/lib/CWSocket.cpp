@@ -99,29 +99,31 @@ void CWSocket::disconnect()
 }
 
 SocketData &CWSocket::Send(SocketData *data) {
-    char *recvBuf = new char[4096];
-    char *buff = new char;
-    memcpy(buff, data, sizeof(data));
+    char recvBuf[4096];
+    char buff[4096];
+    memcpy(buff, data, 4096);
 
     switch (m_type)
     {
         case 0: {
-            send(sockConn, buff, sizeof(data) + 1, 0);
+            send(sockConn, buff, 4096, 0);
         }break;
         case 1: {
-            send(sockConn, buff, sizeof(data) + 1, 0);
+            send(sockConn, buff, 4096, 0);
             recv(sockConn, recvBuf, 4096, 0);
         }
         default:
             break;
     }
-    return (SocketData &)recvBuf;
+	SocketData* revData = new SocketData;
+	memcpy(revData, recvBuf, 4096);
+    return *revData;
 }
 
 SocketData &CWSocket::GetAcceptData() {
 	char recvBuf[4096];
-    recv(sockConn, recvBuf, sizeof(SocketData), 0);
+    recv(sockConn, recvBuf, 4096, 0);
 	SocketData  *sock = new SocketData;
-	memcpy(sock, recv, sizeof(SocketData));
+	memcpy(sock, recvBuf, 4096);
     return *sock;
 }

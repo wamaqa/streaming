@@ -18,5 +18,6 @@ int main()
 	send.dataType = STR;
 
 	m_socket->Send(&send);
-	getchar();    return 0;
+	getchar();    
+	return 0;
 }

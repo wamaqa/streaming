@@ -14,14 +14,8 @@ int main()
 	memcpy(send->buff, "Test", sizeof("Test"));
 	send->dataType = STR;
 	send->size = sizeof("Test");
-	char* recvBuf = new char[4096];
-	char buff[4096];
-	memcpy(buff, send, send->size);
-
-	memcpy(send, buff, send->size);
-	auto sock = m_socket->Send(buff, sizeof(SocketData), 0);
-	m_socket->Recv(recvBuf, sizeof(SocketData), 0);
-	printf(recvBuf);
+	auto sock = m_socket->Send(send);
+	printf(sock.buff);
 	//m_socket->SetBindPort(6666);
 	//m_socket->Accept();
 	//printf(m_socket->GetAccept());

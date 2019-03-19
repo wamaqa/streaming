@@ -15,7 +15,7 @@ struct SocketData
 {
 	DataType dataType;
 	int size;
-	char buff[1024];
+	char buff[4088];
 };
 
 
