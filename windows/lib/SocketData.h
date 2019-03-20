@@ -14,7 +14,10 @@ enum DataType {
 struct SocketData
 {
 	DataType dataType;
+	int Sum;
+	int index;
 	int size;
+	int status;
 	char buff[4088];
 };
 
